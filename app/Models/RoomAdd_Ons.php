@@ -16,7 +16,7 @@ class RoomAdd_Ons extends Model
     protected $table='room_add_ons';
 
     public function room_booking_add_ons(){
-        return $this->belongsToMany(RoomAddOnsBookings::class,'room_add_on_id');
+        return $this->hasMany(RoomAddOnsBookings::class,'room_add_on_id');
     }
 
 }
