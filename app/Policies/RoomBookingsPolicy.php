@@ -2,26 +2,26 @@
 
 namespace App\Policies;
 
-use App\Models\Service;
+use App\Models\RoomBookings;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ServicePolicy
+class RoomBookingsPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->role=== 'manager';
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Service $service): bool
+    public function view(User $user, RoomBookings $roomBookings): bool
     {
-        return true;
+        return $user->role === 'manager'|| $user->id === $roomBookings->user_id;
     }
 
     /**
@@ -29,29 +29,29 @@ class ServicePolicy
      */
     public function create(User $user): bool
     {
-        return $user->role === 'manager';
+        return $user->role === 'manager' || $user->role === 'guest';
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Service $service): bool
+    public function update(User $user, RoomBookings $roomBookings): bool
     {
-        return $user->role === 'manager';
+        return $user->role === 'manager' || $user->id === $roomBookings->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Service $service): bool
+    public function delete(User $user, RoomBookings $roomBookings): bool
     {
-        return $user->role === 'manager';
+       return $user->role === 'manager' || $user->id === $roomBookings->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Service $service): bool
+    public function restore(User $user, RoomBookings $roomBookings): bool
     {
         return $user->role === 'manager';
     }
@@ -59,7 +59,7 @@ class ServicePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Service $service): bool
+    public function forceDelete(User $user, RoomBookings $roomBookings): bool
     {
         return $user->role === 'manager';
     }
