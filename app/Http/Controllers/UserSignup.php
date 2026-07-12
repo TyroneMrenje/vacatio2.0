@@ -36,7 +36,7 @@ class UserSignup extends Controller
 
         Auth::login($user);   
         
-        return redirect('/')->with('success', 'Welcome');
+        return redirect('/email/verify')->with('success', 'Welcome');
         
     }
 }

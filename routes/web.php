@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\UserSignup;;
 use App\Http\Controllers\UserLogin;
+use App\Http\Controllers\HandlePasswordSubmit;
+use App\Http\Controllers\ResetPassword;
 
 Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
@@ -43,5 +45,19 @@ Route::post('/email/verification-notification', function (Request $request) {
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/forgot-password', function () {
+    return Inertia::render('auth/forgot-password');
+})->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password',[HandlePasswordSubmit::class, 'HandlePasswordSubmit'])->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return Inertia::render('auth/reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password',[ResetPassword::class, 'HandleResetPassword'])->middleware('guest')->name('password.update');
+
+
 
 require __DIR__.'/settings.php';
