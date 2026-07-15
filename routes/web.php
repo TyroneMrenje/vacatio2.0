@@ -58,6 +58,10 @@ Route::get('/reset-password/{token}', function (string $token) {
 
 Route::post('/reset-password',[ResetPassword::class, 'HandleResetPassword'])->middleware('guest')->name('password.update');
 
+Route::get('/checkout', function(){
+    return Inertia::render('checkout');
+});
+
 
 
 require __DIR__.'/settings.php';

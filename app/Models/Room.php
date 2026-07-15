@@ -12,8 +12,11 @@ class Room extends Model
     use SoftDeletes, HasUuids;
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['name','amenities','description','bed_size','area_size','view','max_occupancy','price'];
+    protected $fillable = ['id','name','description','bed_size','area_size','view','max_occupancy','price'];
     protected $table= 'rooms';
+    protected $casts = [
+    'amenities' => 'array',
+];
 
     public function room_images(){
         return $this->hasMany(RoomImages::class,'room_id');
