@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class ServiceMenu extends Model
 {
     //
-    use SoftDeletes, HasUuids;
+    use HasUuids;
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['name','price','description'];
+    protected $fillable = ['id','service_id','name','price','description'];
     protected $table='service_menu';
 
     public function service(){

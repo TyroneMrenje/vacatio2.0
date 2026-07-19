@@ -3,17 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 
 class Service extends Model
 {
     //
-    use SoftDeletes, HasUuids;
+    use  HasUuids;
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable=['name','image_path','description'];
+    protected $fillable=['id','name','image_path','description'];
     protected $table= 'service';
 
     public function service_menu(){

@@ -22,17 +22,17 @@ Route::get('/user/register', function () {
     return Inertia::render('auth/register');
 });
 
-Route::post('/user/register',[UserSignup::class,'userSignup']);
+Route::post('/user/register',[UserSignup::class,'userSignup'])->middleware('throttle:6,1');
 
 Route::get('user/login',function(){
     return Inertia::render('auth/login');
 });
 
-Route::post('/user/login', [UserLogin::class,'authenticate']);
+Route::post('/user/login', [UserLogin::class,'authenticate'])->middleware('throttle:6,1');
 
 Route::get('/email/verify', function () {
     return Inertia::render('auth/verify-email');
-})->middleware('auth')->name('verification.notice');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
