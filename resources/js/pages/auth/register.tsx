@@ -18,7 +18,7 @@ export default function Register({ passwordRules }: Props) {
             <Head title="Register" />
             <Form
                 method='POST'
-                action='/user/register'
+                action='/register'
                 resetOnSuccess={['password', 'password_confirmation']}
                 disableWhileProcessing
                 className="flex flex-col gap-6"
@@ -92,7 +92,7 @@ export default function Register({ passwordRules }: Props) {
 
                             <Button
                                 type="submit"
-                                className="mt-2 w-full"
+                                className="mt-2 w-full bg-[#000521]"
                                 tabIndex={5}
                                 data-test="register-user-button"
                             >
@@ -101,7 +101,7 @@ export default function Register({ passwordRules }: Props) {
                             </Button>
                         </div>
 
-                        <div className="text-center text-sm text-muted-foreground">
+                        <div className="text-center text-md text-muted-foreground">
                             Already have an account?{' '}
                             <TextLink href={login()} tabIndex={6}>
                                 Log in

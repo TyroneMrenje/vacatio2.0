@@ -4,15 +4,17 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
-use App\Http\Controllers\UserSignup;;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserSignup;
 use App\Http\Controllers\UserLogin;
 use App\Http\Controllers\HandlePasswordSubmit;
 use App\Http\Controllers\ResetPassword;
+use App\Http\Controllers\SpaController;
+use App\Http\Controllers\EventController;
 
-Route::inertia('/', 'welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
-])->name('home');
+Route::get('/', function(){
+    return Inertia::render('home');
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
@@ -61,6 +63,17 @@ Route::post('/reset-password',[ResetPassword::class, 'HandleResetPassword'])->mi
 Route::get('/checkout', function(){
     return Inertia::render('checkout');
 });
+
+Route::get('/rooms', [RoomController::class, 'getRoom']);
+
+Route::get('/rooms/{id}/{room}', [RoomController::class, 'getRoomQuery']);
+
+Route::get('/spa', [SpaController::class,'SpaPage']);
+
+Route::get('/event',[EventController::class,'getEventDetails']);
+
+Route::get('/event/{id}/{room}',[EventController::class, 'getEventSpace']);
+  
 
 
 

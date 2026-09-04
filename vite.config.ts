@@ -3,8 +3,9 @@ import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
-import { bunny } from 'laravel-vite-plugin/fonts';
+import { bunny, fontsource } from 'laravel-vite-plugin/fonts';
 import { defineConfig } from 'vite';
+
 
 export default defineConfig({
     plugins: [

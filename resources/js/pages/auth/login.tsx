@@ -25,16 +25,23 @@ export default function Login({
     return (
         <>
             <Head title="Log in" />
+            <div className=''>
 
+            </div>
             <Form
+               {...store.form()}
                 method='POST'
-                action='/user/login'
+                action='/login'
                 resetOnSuccess={['password']}
                 className="flex flex-col gap-6"
             >
                 {({ processing, errors }) => (
                     <>
-                        <div className="grid gap-6">
+                        <div className="grid gap-6 h-full ">
+                            <div className='flex flex-col items-center space-y-3'>
+                                <h1 className='font-medium text-2xl'>Log in to your account</h1>
+                                <p className=''>Enter your email and password below to log in</p>
+                            </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email address</Label>
                                 <Input
@@ -85,7 +92,7 @@ export default function Login({
 
                             <Button
                                 type="submit"
-                                className="mt-4 w-full"
+                                className="mt-4 w-full bg-[#000521] text-lg font-bold"
                                 tabIndex={4}
                                 disabled={processing}
                                 data-test="login-button"
@@ -116,7 +123,3 @@ export default function Login({
     );
 }
 
-Login.layout = {
-    title: 'Log in to your account',
-    description: 'Enter your email and password below to log in',
-};
